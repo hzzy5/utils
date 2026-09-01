@@ -1,17 +1,11 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+//import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import MainScreen from "./tabs/MainScreen/mainScreen";
 // weitere Tabs importieren
 
 function App() {
   return (
-    <BrowserRouter>
-      <nav>
-        <Link to="/vrr">VRR</Link>
-        {/* weitere Links */}
-      </nav>
-      <Routes>
-         /* <Route path="/vrr" element={<VrrBoard />} /> */
-        {/* weitere Routes */}
-      </Routes>
-    </BrowserRouter>
+    <MainScreen />
   );
 }
+
+export default App;
