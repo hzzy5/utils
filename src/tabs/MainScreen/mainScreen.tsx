@@ -1,5 +1,5 @@
 import FeatureItem from "../../components/featureItem";
-
+import { Link } from "react-router-dom";
 export default function MainScreen() {
   return (
     <>
@@ -8,7 +8,9 @@ export default function MainScreen() {
       </header>
       <main>
         <nav className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 px-4 py-4">
-          <FeatureItem title="trains" />
+          <Link to="/trains">
+            <FeatureItem title="trains" />
+          </Link>
           <FeatureItem title="to-do's" />
           <FeatureItem title="streaks" />
           <FeatureItem title="calender" />
