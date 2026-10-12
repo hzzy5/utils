@@ -9,7 +9,13 @@ function TopBar() {
           aria-label="Zurück"
           className="absolute left-4 top-1/2 -translate-y-1/2 p-2"
         >
-          <ArrowLeft aria-hidden="true" size={24} />
+          <ArrowLeft
+            aria-hidden="true"
+            size={35}
+            strokeWidth={1.5}
+            strokeLinecap="square"
+            strokeLinejoin="miter"
+          />
         </button>
         <h1 className="text-5xl justify-center items-center [font-family:'Abel']">
           utils
