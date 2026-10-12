@@ -5,15 +5,10 @@ import BotBar from "./botbar/BotBar";
 function AppLayout() {
   return (
     <>
-      <header>
-        <TopBar></TopBar>
-      </header>
-      <body>
+      <TopBar></TopBar>
+      <main>
         <Outlet></Outlet>
-      </body>
-      <footer>
-        <BotBar></BotBar>
-      </footer>
+      </main>
     </>
   );
 }

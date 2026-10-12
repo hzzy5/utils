@@ -1,11 +1,7 @@
 function BotBar() {
   return (
     <>
-      <div className="bg-[#d9d9d9] h-15 items-center justify-center flex sticky bottom-0">
-        <h1 className="text-5xl justify-center items-center [font-family:'Abel']">
-          utils
-        </h1>
-      </div>
+      <nav className="bg-[#d9d9d9] fixed bottom-0 z-50 grid grid-cols-3 h-16 "></nav>
     </>
   );
 }
