@@ -1,10 +1,14 @@
-import { Link } from "react-router";
+import { features } from "../features";
+import FeatureTile from "../components/FeatureTile";
 
 function HomePage() {
   return (
     <>
-      <h1>HomePage</h1>
-      <Link to={"/todos"}>todos</Link>
+      <div className="feature-list">
+        {features.map((feature) => (
+          <FeatureTile key={feature.id} feature={feature} />
+        ))}
+      </div>
     </>
   );
 }
