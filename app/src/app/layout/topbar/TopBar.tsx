@@ -24,7 +24,7 @@ function TopBar() {
           </button>
         )}
 
-        <h1 className="text-5xl justify-center items-center [font-family:'Abel']">
+        <h1 className="text-5xl justify-center items-center font-['Abel']">
           utils
         </h1>
       </div>

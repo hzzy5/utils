@@ -1,13 +1,14 @@
-import { Outlet } from "react-router";
+import { Outlet, useNavigation } from "react-router";
 import TopBar from "./topbar/TopBar";
+import Loading from "@/shared/ui/Loading";
 
 function AppLayout() {
+  const navigation = useNavigation();
+  const isLoading = navigation.state === "loading";
   return (
     <>
       <TopBar></TopBar>
-      <main>
-        <Outlet></Outlet>
-      </main>
+      <main>{isLoading ? <Loading /> : <Outlet />}</main>
     </>
   );
 }
