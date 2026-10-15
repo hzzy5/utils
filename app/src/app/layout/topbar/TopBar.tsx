@@ -7,7 +7,7 @@ function TopBar() {
   const isHome = pathname === "/";
   return (
     <>
-      <div className="bg-[#d9d9d9] h-15 items-center justify-center flex sticky top-0">
+      <div className="bg-[#d9d9d9] h-10 items-center justify-center flex sticky top-0">
         {!isHome && (
           <button
             onClick={() => navigate(-1)}
