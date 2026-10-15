@@ -1,10 +1,10 @@
 import type { FeatureDefinition } from "@/shared/types/feature";
-import { Link } from "react-router";
+import Tile from "@/app/components/Tile";
 
 export default function FeatureTile({
   feature,
 }: {
   feature: FeatureDefinition;
 }) {
-  return <Link to={feature.path}>{feature.title}</Link>;
+  return <Tile title={feature.title} path={feature.path} />;
 }
