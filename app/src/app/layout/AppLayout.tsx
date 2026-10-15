@@ -10,7 +10,7 @@ function AppLayout() {
       <div className="fixed top-0 left-0 right-0 z-50">
         <TopBar />
       </div>
-      <main>{isLoading ? <Loading /> : <Outlet />}</main>
+      <main className="pt-14">{isLoading ? <Loading /> : <Outlet />}</main>
     </div>
   );
 }
