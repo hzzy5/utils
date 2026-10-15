@@ -1,5 +1,5 @@
-import { features } from "../features";
-import FeatureTile from "../components/FeatureTile";
+import { features } from "../../features";
+import FeatureTile from "./FeatureTile";
 
 function HomePage() {
   return (
