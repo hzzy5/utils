@@ -3,7 +3,7 @@ import SubHeadline from "@/app/components/SubHeadline";
 function WeatherPage() {
   return (
     <>
-      <SubHeadline text="Weather" />
+      <SubHeadline text="Wetter" />
     </>
   );
 }
