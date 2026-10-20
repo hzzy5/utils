@@ -1,7 +1,9 @@
+import SubHeadline from "@/app/components/SubHeadline";
+
 function TrainsPage() {
   return (
     <>
-      <h1>TrainsPage</h1>
+      <SubHeadline text="Züge" />
     </>
   );
 }

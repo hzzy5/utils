@@ -1,7 +1,9 @@
+import SubHeadline from "@/app/components/SubHeadline";
+
 function WeatherPage() {
   return (
     <>
-      <h1>WeatherPage</h1>
+      <SubHeadline text="Weather" />
     </>
   );
 }

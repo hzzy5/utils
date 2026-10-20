@@ -1,7 +1,9 @@
+import SubHeadline from "@/app/components/SubHeadline";
+
 function RankingPage() {
   return (
     <>
-      <h1>RankingPage</h1>
+      <SubHeadline text="Ranking" />
     </>
   );
 }

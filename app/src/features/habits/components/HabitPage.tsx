@@ -1,7 +1,9 @@
+import SubHeadline from "@/app/components/SubHeadline";
+
 function HabitPage() {
   return (
     <>
-      <h1>HabitPage</h1>
+      <SubHeadline text="Habits" />
     </>
   );
 }

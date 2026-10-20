@@ -1,7 +1,9 @@
+import SubHeadline from "@/app/components/SubHeadline";
+
 function ShoppingPage() {
   return (
     <>
-      <h1>ShoppingPage</h1>
+      <SubHeadline text="Shopping" />
     </>
   );
 }

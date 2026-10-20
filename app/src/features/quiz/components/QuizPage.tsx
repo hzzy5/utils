@@ -1,7 +1,9 @@
+import SubHeadline from "@/app/components/SubHeadline";
+
 function QuizPage() {
   return (
     <>
-      <h1>QuizPage</h1>
+      <SubHeadline text="Habits" />
     </>
   );
 }
