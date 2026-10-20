@@ -17,7 +17,7 @@ export function createToDo(
 }
 export function updateToDo(
   todo: ToDo,
-  updates: Partial<Omit<ToDo, "id" | "position">>,
+  updates: Partial<Omit<ToDo, "id" | "position" | "category">>,
 ): ToDo {
   return {
     ...todo,
