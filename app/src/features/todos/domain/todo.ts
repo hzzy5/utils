@@ -8,4 +8,4 @@ export interface ToDo {
   position: number;
 }
 
-export type TodoInput = Pick<ToDo, "title" | "description" | "category">;
+export type ToDoInput = Pick<ToDo, "title" | "description" | "category">;

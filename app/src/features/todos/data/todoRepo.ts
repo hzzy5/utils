@@ -6,10 +6,10 @@ import {
   updateToDo as applyUpdate,
   moveToDo as applyMove,
 } from "../domain/logic";
-import type { ToDo, TodoInput } from "../domain/todo";
+import type { ToDo, ToDoInput } from "../domain/todo";
 import type { CategoryId } from "../domain/categories";
 
-export async function addToDo(input: TodoInput): Promise<void> {
+export async function addToDo(input: ToDoInput): Promise<void> {
   await db.transaction("rw", db.todos, async () => {
     const todoArray = await db.todos.toArray();
     const todo = createToDo(
