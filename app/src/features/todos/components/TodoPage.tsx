@@ -1,7 +1,9 @@
+import SubHeadline from "@/app/components/SubHeadline";
+
 function TodoPage() {
   return (
     <>
-      <h1>TodoPage</h1>
+      <SubHeadline text="To-Do's" />
     </>
   );
 }
