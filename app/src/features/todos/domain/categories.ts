@@ -1,6 +1,6 @@
 export const CATEGORIES = [
   { id: "tagesplan", label: "Tagesplan" },
-  { id: "offen", label: "Offene To-Do's" },
+  { id: "offen", label: "Offene" },
   { id: "backlog", label: "Backlog" },
   { id: "done", label: "Abgeschlossen" },
 ] as const;
