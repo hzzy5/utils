@@ -1,4 +1,4 @@
-import SubHeadline from "@/app/components/SubHeadline";
+import SubHeadline from "@/shared/ui/SubHeadline";
 
 function QuizPage() {
   return (

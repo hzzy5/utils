@@ -1,5 +1,5 @@
 import type { FeatureDefinition } from "@/shared/types/feature";
-import Tile from "@/app/components/Tile";
+import Tile from "@/shared/ui/Tile";
 
 export default function FeatureTile({
   feature,

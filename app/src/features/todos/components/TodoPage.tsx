@@ -1,10 +1,15 @@
-import TodoHead from "./TodoHead";
+import { Route, Routes } from "react-router/internal/react-server-client";
+import { TodoHub } from "./TodoHub";
 
 function TodoPage() {
   return (
-    <>
-      <TodoHead />
-    </>
+    <Routes>
+      <Route index element={<TodoHub />} />
+      <Route path="list/:category" element={<p>Todo Liste</p>} />
+      <Route path="new" element={<p>Neues To-Do</p>} />
+      <Route path=":id" element={<p>Detail</p>} />
+      <Route path="*" element={<p>Seite nicht gefunden</p>} />
+    </Routes>
   );
 }
 

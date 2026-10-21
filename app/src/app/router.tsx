@@ -4,7 +4,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import { features } from "./features";
 
 export const featureRoutes = features.map((feature) => ({
-  path: feature.path,
+  path: `${feature.path}/*`,
   lazy: async () => {
     const page = await feature.loadPage();
     return { Component: page.default };
