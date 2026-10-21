@@ -7,6 +7,8 @@ import {
 import TodoHead from "./TodoHead";
 import { useToDosByCategory } from "../hooks/useToDos";
 import ToDoItem from "./ToDoItem";
+import FloatingActionButton from "@/shared/ui/FloatingActionButton";
+import { todoPaths } from "../routes";
 
 export default function TodoListPage() {
   const { category } = useParams();
@@ -22,6 +24,7 @@ function CategoryList({ category }: { category: CategoryId }) {
   return (
     <>
       <TodoHead subHeadlineText={getCategoryLabel(category)} />
+      <FloatingActionButton to={todoPaths.create} />
       {todos === undefined ? (
         <p>Lädt …</p>
       ) : todos.length === 0 ? (

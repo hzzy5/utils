@@ -2,6 +2,7 @@ import TodoHead from "./TodoHead";
 import ToDoListTile from "./TodoListTile";
 import { todoPaths } from "../routes";
 import { CATEGORIES } from "../domain/categories";
+import FloatingActionButton from "@/shared/ui/FloatingActionButton";
 
 export function TodoHub() {
   return (
@@ -16,6 +17,7 @@ export function TodoHub() {
           />
         ))}
       </div>
+      <FloatingActionButton to={todoPaths.create} />
     </>
   );
 }
