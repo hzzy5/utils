@@ -30,7 +30,7 @@ export async function getToDosByCategory(
 }
 
 export async function getToDo(id: string): Promise<ToDo | undefined> {
-  return db.todos.get(id);
+  return db.todos.get(id) ?? null;
 }
 
 export async function updateToDo(
