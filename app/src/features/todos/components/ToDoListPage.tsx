@@ -5,7 +5,7 @@ import {
   type CategoryId,
 } from "../domain/categories";
 import TodoHead from "./TodoHead";
-import { useToDosByCategory } from "../hooks/useToDos";
+//import { useToDosByCategory } from "../hooks/useToDos";
 
 export default function TodoListPage() {
   const { kategorie } = useParams();
@@ -17,7 +17,7 @@ export default function TodoListPage() {
 }
 
 function CategoryList({ category }: { category: CategoryId }) {
-  const todos = useToDosByCategory(category);
+  //const todos = useToDosByCategory(category);
   return <TodoHead subHeadlineText={getCategoryLabel(category)} />;
   // todos === undefined → "Lädt …", leer → Hinweis, sonst Titel als einfache Liste
 }
