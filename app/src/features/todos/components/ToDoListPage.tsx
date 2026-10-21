@@ -8,12 +8,12 @@ import TodoHead from "./TodoHead";
 //import { useToDosByCategory } from "../hooks/useToDos";
 
 export default function TodoListPage() {
-  const { kategorie } = useParams();
+  const { category } = useParams();
 
-  if (!kategorie || !isCategoryId(kategorie)) {
+  if (!category || !isCategoryId(category)) {
     return <p>Kategorie nicht gefunden</p>;
   }
-  return <CategoryList category={kategorie} />;
+  return <CategoryList category={category} />;
 }
 
 function CategoryList({ category }: { category: CategoryId }) {
