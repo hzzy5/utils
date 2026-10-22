@@ -29,8 +29,13 @@ export function ToDoForm({
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Titel</label>
+      <form
+        onSubmit={handleSubmit}
+        className="rounded-lg border-2 border-black bg-[#d9d9d9] p-4"
+      >
+        <label htmlFor="title" className="text-sm">
+          Titel
+        </label>
         <input
           id="title"
           type="text"
