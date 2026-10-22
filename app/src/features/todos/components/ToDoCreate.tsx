@@ -2,7 +2,7 @@ import { ToDoForm } from "./ToDoForm";
 import TodoHead from "./TodoHead";
 import { actions } from "../hooks/useToDosActions";
 import { CATEGORIES } from "../domain/categories";
-import { useLocation, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import type { ToDoInput } from "../domain/todo";
 
 export function ToDoCreate() {

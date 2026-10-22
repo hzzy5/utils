@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import type { ToDoInput } from "../domain/todo";
 import type { SubmitResult, TitleError } from "../domain/validation";
 import { MAX_LENGTH } from "../domain/validation";
