@@ -1,31 +1,67 @@
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
+import type { ToDoInput } from "../domain/todo";
+import type { SubmitResult, TitleError } from "../domain/validation";
+import { MAX_LENGTH } from "../domain/validation";
+import { CATEGORIES, isCategoryId } from "../domain/categories";
 
-export function ToDoForm({ type }: { type: "create" | "detail" }) {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
+interface TodoFormProps {
+  initialValues: ToDoInput;
+  submitLabel: string;
+  onSubmit: (values: ToDoInput) => Promise<SubmitResult>;
+}
+
+export function ToDoForm({
+  initialValues,
+  submitLabel,
+  onSubmit,
+}: TodoFormProps) {
+  const [title, setTitle] = useState(initialValues.title);
+  const [description, setDescription] = useState(initialValues.description);
+  const [category, setCategory] = useState(initialValues.category);
+  const [error, setError] = useState<TitleError | null>(null);
+
+  async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setError(null);
+    const result = await onSubmit({ title, description, category });
+    result.ok ? setError(null) : setError(result.error);
+  }
 
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="title">Titel</label>
         <input
+          id="title"
           type="text"
-          placeholder="Titel"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          maxLength={MAX_LENGTH}
         />
-        <input
-          type="text"
-          placeholder="Beschreibung"
+        <label htmlFor="description">Beschreibung</label>
+        <textarea
+          id="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-        <input
-          type="text"
-          placeholder="Kategorie"
+        <label htmlFor="category">Kategorie</label>
+        <select
+          id="category"
           value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        />
+          onChange={(e) =>
+            setCategory(
+              isCategoryId(e.target.value) ? e.target.value : CATEGORIES[0].id,
+            )
+          }
+        >
+          {CATEGORIES.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.label}
+            </option>
+          ))}
+        </select>
+        {error && <p>{error}</p>}
+        <button type="submit">{submitLabel}</button>
       </form>
     </>
   );

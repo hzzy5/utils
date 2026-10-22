@@ -29,8 +29,8 @@ export async function getToDosByCategory(
   return sortToDosByPosition(todos);
 }
 
-export async function getToDo(id: string): Promise<ToDo | undefined> {
-  return db.todos.get(id) ?? null;
+export async function getToDo(id: string): Promise<ToDo | null> {
+  return (await db.todos.get(id)) ?? null;
 }
 
 export async function updateToDo(

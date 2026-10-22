@@ -1,12 +1,16 @@
-const max_length = 40;
+export const MAX_LENGTH = 40;
+export type TitleError = "empty" | "too_long";
+export type SubmitResult = { ok: true } | { ok: false; error: TitleError };
 
-export function validateTodoTitle(title: string): string | null {
-  title.trim();
-  if (title.length === 0) {
-    return "empty";
+export function validateTodoTitle(
+  title: string,
+): { ok: true; value: string } | { ok: false; error: TitleError } {
+  const value = title.trim();
+  if (value.length === 0) {
+    return { ok: false, error: "empty" };
   }
-  if (title.length > max_length) {
-    return `too_long`;
+  if (value.length > MAX_LENGTH) {
+    return { ok: false, error: "too_long" };
   }
-  return null;
+  return { ok: true, value };
 }

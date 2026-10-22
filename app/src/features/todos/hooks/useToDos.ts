@@ -9,3 +9,4 @@ export function useToDosByCategory(category: CategoryId) {
 export function useToDo(id: string) {
   return useLiveQuery(() => getToDo(id), [id]);
 }
+//undefined = lädt, null = gibts nicht

@@ -10,7 +10,7 @@ function TodoPage() {
       <Route index element={<TodoHub />} />
       <Route path="list/:category" element={<TodoListPage />} />
       <Route path="new" element={<ToDoCreate />} />
-      <Route path=":id" element={<ToDoDetail id=":id" />} />
+      <Route path=":id" element={<ToDoDetail />} />
       <Route path="*" element={<p>Seite nicht gefunden</p>} />
     </Routes>
   );
