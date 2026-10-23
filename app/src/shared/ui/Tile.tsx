@@ -17,7 +17,7 @@ export default function Tile({
     | "text-4xl"
     | "text-5xl"
     | "text-6xl";
-  paddingY?: "py-2" | "py-3" | "py-4" | "py-5" | "py-6";
+  paddingY?: "py-2" | "py-3" | "py-4" | "py-5" | "py-6" | "py-1";
 }) {
   return (
     <Link

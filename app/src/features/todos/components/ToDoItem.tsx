@@ -8,7 +8,8 @@ export default function ToDoItem({ todo }: { todo: ToDo }) {
       title={todo.title}
       path={todoPaths.detail(todo.id)}
       textSize="text-xl"
-      className="py-3 font-[Abel]"
+      className=" font-[Abel]"
+      paddingY="py-1"
     />
   );
 }
