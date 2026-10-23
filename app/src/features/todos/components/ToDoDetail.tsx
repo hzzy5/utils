@@ -36,15 +36,11 @@ export function ToDoDetail() {
         }}
         submitLabel="Speichern"
         onSubmit={handleSubmit}
-      />
-      <button
-        onClick={() => {
+        onDelete={() => {
           actions.deleteToDo(todo!.id);
           navigate(-1);
         }}
-      >
-        Löschen
-      </button>
+      />
     </>
   );
 }

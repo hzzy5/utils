@@ -27,6 +27,7 @@ export function ToDoCreate() {
         }}
         submitLabel="Erstellen"
         onSubmit={handleSubmit}
+        onDelete={undefined}
       />
     </>
   );
