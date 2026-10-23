@@ -7,9 +7,5 @@ export default function ToDoListTile({
   to: string;
   label: string;
 }) {
-  return (
-    <div className="">
-      <Tile title={label} path={to} />
-    </div>
-  );
+  return <Tile title={label} path={to} />;
 }

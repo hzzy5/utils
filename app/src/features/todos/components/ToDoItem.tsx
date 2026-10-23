@@ -4,8 +4,11 @@ import type { ToDo } from "../domain/todo";
 
 export default function ToDoItem({ todo }: { todo: ToDo }) {
   return (
-    <div className="">
-      <Tile title={todo.title} path={todoPaths.detail(todo.id)} />
-    </div>
+    <Tile
+      title={todo.title}
+      path={todoPaths.detail(todo.id)}
+      textSize="text-xl"
+      className="py-3 font-[Abel]"
+    />
   );
 }

@@ -28,9 +28,11 @@ function CategoryList({ category }: { category: CategoryId }) {
       {todos === undefined ? (
         <p>Lädt …</p>
       ) : todos.length === 0 ? (
-        <p>Keine To-Do's in dieser Kategorie</p>
+        <p className="text-center text-gray-500">
+          Keine To-Do's in dieser Kategorie
+        </p>
       ) : (
-        <ul>
+        <ul className="mx-auto flex w-full max-w-[25rem] flex-col gap-4 px-4 py-5">
           {todos.map((todo) => (
             <ToDoItem key={todo.id} todo={todo} />
           ))}
