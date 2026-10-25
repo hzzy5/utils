@@ -1,5 +1,12 @@
-import { CATEGORIES, type CategoryId } from "./categories";
+import { type CategoryId } from "./categories";
 import type { ToDo } from "./todo";
+
+const CATEGORY_FLOW = [
+  "backlog",
+  "offen",
+  "tagesplan",
+  "done",
+] satisfies readonly CategoryId[];
 
 export function createToDo(
   title: string,
@@ -58,13 +65,13 @@ export function sortToDosByPosition(todos: ToDo[]): ToDo[] {
 }
 
 export function getNextCategory(id: CategoryId): CategoryId | null {
-  const index = CATEGORIES.findIndex((category) => category.id === id);
-  return CATEGORIES[index + 1]?.id ?? null;
+  const index = CATEGORY_FLOW.indexOf(id);
+  return CATEGORY_FLOW[index + 1] ?? null;
 }
 
 export function getPreviousCategory(id: CategoryId): CategoryId | null {
-  const index = CATEGORIES.findIndex((category) => category.id === id);
-  return CATEGORIES[index - 1]?.id ?? null;
+  const index = CATEGORY_FLOW.indexOf(id);
+  return CATEGORY_FLOW[index - 1] ?? null;
 }
 
 export function toggleSelected(todo: ToDo): ToDo {

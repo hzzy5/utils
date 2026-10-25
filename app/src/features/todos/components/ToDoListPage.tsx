@@ -9,6 +9,10 @@ import { useToDosByCategory } from "../hooks/useToDos";
 import ToDoItem from "./ToDoItem";
 import FloatingActionButton from "@/shared/ui/FloatingActionButton";
 import { todoPaths } from "../routes";
+import {
+  moveCheckedToNext,
+  moveCheckedToPrevious,
+} from "../hooks/useToDosActions";
 
 export default function TodoListPage() {
   const { category } = useParams();
@@ -27,8 +31,8 @@ function CategoryList({ category }: { category: CategoryId }) {
         subHeadlineText={getCategoryLabel(category)}
         buttonMode={true}
         category={category}
-        onPressLeft={() => {}}
-        onPressRight={() => {}}
+        onPressLeft={() => moveCheckedToNext(category)}
+        onPressRight={() => moveCheckedToPrevious(category)}
       />
       <FloatingActionButton to={todoPaths.create} />
       {todos === undefined ? (
