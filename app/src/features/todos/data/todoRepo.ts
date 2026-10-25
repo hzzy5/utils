@@ -70,3 +70,25 @@ export async function toggleSelected(id: string): Promise<void> {
     await db.todos.put(applyToggleSelected(todo));
   });
 }
+
+export async function moveSelectedToCategory(
+  from: CategoryId,
+  to: CategoryId,
+): Promise<number> {
+  return db.transaction("rw", db.todos, async () => {
+    const selected = await db.todos
+      .where("category")
+      .equals(from)
+      .and((todo) => todo.selected)
+      .sortBy("position");
+    if (selected.length === 0) return 0;
+    const targets = await db.todos.where("category").equals(to).toArray();
+    const start = getNextPosition(targets, to);
+
+    const moved = selected.map((todo, index) =>
+      applyMove(todo, to, start + index),
+    );
+    await db.todos.bulkPut(moved);
+    return moved.length;
+  });
+}

@@ -27,6 +27,8 @@ function CategoryList({ category }: { category: CategoryId }) {
         subHeadlineText={getCategoryLabel(category)}
         buttonMode={true}
         category={category}
+        onPressLeft={() => {}}
+        onPressRight={() => {}}
       />
       <FloatingActionButton to={todoPaths.create} />
       {todos === undefined ? (
