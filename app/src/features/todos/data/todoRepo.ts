@@ -5,6 +5,7 @@ import {
   sortToDosByPosition,
   updateToDo as applyUpdate,
   moveToDo as applyMove,
+  toggleSelected as applyToggleSelected,
 } from "../domain/logic";
 import type { ToDo, ToDoInput } from "../domain/todo";
 import type { CategoryId } from "../domain/categories";
@@ -59,5 +60,13 @@ export async function moveToDo(
     await db.todos.put(
       applyMove(todo, newCategory, getNextPosition(todoArray, newCategory)),
     );
+  });
+}
+
+export async function toggleSelected(id: string): Promise<void> {
+  await db.transaction("rw", db.todos, async () => {
+    const todo = await db.todos.get(id);
+    if (!todo) return;
+    await db.todos.put(applyToggleSelected(todo));
   });
 }

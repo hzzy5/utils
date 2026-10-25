@@ -6,6 +6,7 @@ export interface ToDo {
   description: string;
   category: CategoryId;
   position: number;
+  selected: boolean;
 }
 
 export type ToDoInput = Pick<ToDo, "title" | "description" | "category">;

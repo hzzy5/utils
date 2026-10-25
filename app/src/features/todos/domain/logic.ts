@@ -13,6 +13,7 @@ export function createToDo(
     description,
     category,
     position,
+    selected: false,
   };
 }
 export function updateToDo(
@@ -34,6 +35,7 @@ export function moveToDo(
     ...todo,
     category: newCategory,
     position: newPosition,
+    selected: false,
   };
 }
 
@@ -63,4 +65,11 @@ export function getNextCategory(id: CategoryId): CategoryId | null {
 export function getPreviousCategory(id: CategoryId): CategoryId | null {
   const index = CATEGORIES.findIndex((category) => category.id === id);
   return CATEGORIES[index - 1]?.id ?? null;
+}
+
+export function toggleSelected(todo: ToDo): ToDo {
+  return {
+    ...todo,
+    selected: !todo.selected,
+  };
 }

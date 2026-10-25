@@ -42,4 +42,5 @@ export const actions = {
   updateToDo,
   deleteToDo: repo.deleteToDo,
   moveToDo: repo.moveToDo,
+  toggleSelected: repo.toggleSelected,
 };
