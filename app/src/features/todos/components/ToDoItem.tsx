@@ -3,7 +3,6 @@ import type { ToDo } from "../domain/todo";
 import { toggleSelected } from "../data/todoRepo";
 import { Link } from "react-router";
 import { GripVerticalIcon } from "lucide-react";
-import Tile from "@/shared/ui/Tile";
 
 export default function ToDoItem({ todo }: { todo: ToDo }) {
   return (
