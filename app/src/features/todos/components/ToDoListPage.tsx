@@ -23,7 +23,11 @@ function CategoryList({ category }: { category: CategoryId }) {
   const todos = useToDosByCategory(category);
   return (
     <>
-      <TodoHead subHeadlineText={getCategoryLabel(category)} />
+      <TodoHead
+        subHeadlineText={getCategoryLabel(category)}
+        buttonMode={true}
+        category={category}
+      />
       <FloatingActionButton to={todoPaths.create} />
       {todos === undefined ? (
         <p>Lädt …</p>
