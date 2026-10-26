@@ -14,7 +14,7 @@ function TodoHead({
   onPressRight?: () => void;
 }) {
   return (
-    <div className="grid grid-cols-[5rem_1fr_5rem] items-center gap-2 px-6">
+    <div className="grid grid-cols-[5rem_1fr_5rem] items-center gap-2 px-4">
       {buttonMode && category !== "done" ? (
         <button
           className="w-full rounded bg-white py-2 text-black border-3"
