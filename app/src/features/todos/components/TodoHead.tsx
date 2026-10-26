@@ -14,9 +14,14 @@ function TodoHead({
   onPressRight?: () => void;
 }) {
   return (
-    <div className="grid grid-cols-[5rem_1fr_5rem] items-center gap-2">
+    <div className="grid grid-cols-[5rem_1fr_5rem] items-center gap-2 px-6">
       {buttonMode && category !== "done" ? (
-        <button onClick={onPressLeft}>Weiter</button>
+        <button
+          className="w-full rounded bg-white py-2 text-black border-3"
+          onClick={onPressLeft}
+        >
+          Weiter
+        </button>
       ) : (
         <span />
       )}
@@ -24,7 +29,12 @@ function TodoHead({
         text={`To-Do's${subHeadlineText ? ` - ${subHeadlineText}` : ""}`}
       />
       {buttonMode && category !== "backlog" ? (
-        <button onClick={onPressRight}>Zurück</button>
+        <button
+          className="w-full rounded bg-white py-2 text-black border-3"
+          onClick={onPressRight}
+        >
+          Zurück
+        </button>
       ) : (
         <span />
       )}
