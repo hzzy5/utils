@@ -17,7 +17,7 @@ export function TodoHub() {
           />
         ))}
       </div>
-      <FloatingActionButton to={todoPaths.create} />
+      <FloatingActionButton to={todoPaths.create("tagesplan")} />
     </>
   );
 }

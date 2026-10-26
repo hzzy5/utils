@@ -34,7 +34,7 @@ function CategoryList({ category }: { category: CategoryId }) {
         onPressLeft={() => moveCheckedToNext(category)}
         onPressRight={() => moveCheckedToPrevious(category)}
       />
-      <FloatingActionButton to={todoPaths.create} />
+      <FloatingActionButton to={todoPaths.create(category)} />
       {todos === undefined ? (
         <p>Lädt …</p>
       ) : todos.length === 0 ? (

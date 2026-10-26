@@ -1,12 +1,19 @@
 import { ToDoForm } from "./ToDoForm";
 import TodoHead from "./TodoHead";
 import { actions } from "../hooks/useToDosActions";
-import { CATEGORIES } from "../domain/categories";
-import { useNavigate } from "react-router";
+import { isCategoryId, type CategoryId } from "../domain/categories";
+import { useNavigate, useSearchParams } from "react-router";
 import type { ToDoInput } from "../domain/todo";
 
 export function ToDoCreate() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const categoryParam = searchParams.get("category");
+  const initialCategory: CategoryId =
+    categoryParam !== null && isCategoryId(categoryParam)
+      ? categoryParam
+      : "tagesplan";
 
   async function handleSubmit(values: ToDoInput) {
     const result = await actions.addToDo(values);
@@ -23,7 +30,7 @@ export function ToDoCreate() {
         initialValues={{
           title: "",
           description: "",
-          category: CATEGORIES[0].id,
+          category: initialCategory,
         }}
         submitLabel="Erstellen"
         onSubmit={handleSubmit}
