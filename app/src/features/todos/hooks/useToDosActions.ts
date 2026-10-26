@@ -58,4 +58,5 @@ export const actions = {
   deleteToDo: repo.deleteToDo,
   moveToDo: repo.moveToDo,
   toggleSelected: repo.toggleSelected,
+  reorderToDos: repo.reorderToDos,
 };

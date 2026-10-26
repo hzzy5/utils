@@ -12,7 +12,14 @@ import { todoPaths } from "../routes";
 import {
   moveCheckedToNext,
   moveCheckedToPrevious,
+  actions,
 } from "../hooks/useToDosActions";
+import { DndContext, type DragEndEvent } from "@dnd-kit/core";
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+  arrayMove,
+} from "@dnd-kit/sortable";
 
 export default function TodoListPage() {
   const { category } = useParams();
@@ -25,6 +32,22 @@ export default function TodoListPage() {
 
 function CategoryList({ category }: { category: CategoryId }) {
   const todos = useToDosByCategory(category);
+
+  async function handleDragEnd({ active, over }: DragEndEvent) {
+    if (!todos || !over || active.id === over.id) return;
+
+    const oldIndex = todos.findIndex((todo) => todo.id === active.id);
+    const newIndex = todos.findIndex((todo) => todo.id === over.id);
+
+    if (oldIndex === -1 || newIndex === -1) return;
+
+    const reorderedTodos = arrayMove(todos, oldIndex, newIndex);
+
+    await actions.reorderToDos(
+      category,
+      reorderedTodos.map((todo) => todo.id),
+    );
+  }
   return (
     <>
       <TodoHead
@@ -42,11 +65,18 @@ function CategoryList({ category }: { category: CategoryId }) {
           Keine To-Do's in dieser Kategorie
         </p>
       ) : (
-        <ul className="mx-auto flex w-full max-w-[25rem] flex-col gap-4 px-4 py-5">
-          {todos.map((todo) => (
-            <ToDoItem key={todo.id} todo={todo} />
-          ))}
-        </ul>
+        <DndContext onDragEnd={handleDragEnd}>
+          <SortableContext
+            items={todos.map((todo) => todo.id)}
+            strategy={verticalListSortingStrategy}
+          >
+            <ul className="mx-auto flex w-full max-w-[25rem] flex-col gap-4 px-4 py-5">
+              {todos.map((todo) => (
+                <ToDoItem key={todo.id} todo={todo} />
+              ))}
+            </ul>
+          </SortableContext>
+        </DndContext>
       )}
     </>
   );

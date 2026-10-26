@@ -92,3 +92,35 @@ export async function moveSelectedToCategory(
     return moved.length;
   });
 }
+
+export async function reorderToDos(
+  category: CategoryId,
+  orderedIds: string[],
+): Promise<void> {
+  await db.transaction("rw", db.todos, async () => {
+    const categoryTodos = await db.todos
+      .where("category")
+      .equals(category)
+      .toArray();
+
+    const todosById = new Map(categoryTodos.map((todo) => [todo.id, todo]));
+
+    const requestedOrder = orderedIds.flatMap((id) => {
+      const todo = todosById.get(id);
+      if (!todo) return [];
+
+      todosById.delete(id);
+      return [todo];
+    });
+
+    const remainingTodos = [...todosById.values()].sort(
+      (a, b) => a.position - b.position,
+    );
+
+    const reorderedTodos = [...requestedOrder, ...remainingTodos].map(
+      (todo, position) => ({ ...todo, position }),
+    );
+
+    await db.todos.bulkPut(reorderedTodos);
+  });
+}
