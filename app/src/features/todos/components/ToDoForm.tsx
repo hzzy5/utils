@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { ToDoInput } from "../domain/todo";
 import type { SubmitResult, TitleError } from "../domain/validation";
 import { MAX_LENGTH } from "../domain/validation";
@@ -21,6 +21,15 @@ export function ToDoForm({
   const [description, setDescription] = useState(initialValues.description);
   const [category, setCategory] = useState(initialValues.category);
   const [error, setError] = useState<TitleError | null>(null);
+  const descriptionRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    const textarea = descriptionRef.current;
+    if (!textarea) return;
+
+    textarea.style.height = "auto";
+    textarea.style.height = `${textarea.scrollHeight}px`;
+  }, [description]);
 
   async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -55,9 +64,11 @@ export function ToDoForm({
             </label>
             <textarea
               id="description"
+              ref={descriptionRef}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full rounded bg-white px-2 py-1 text-base"
+              rows={4}
+              className="min-h-32 w-full resize-none rounded bg-white px-2 py-1 text-base"
             />
           </div>
           <div className="flex flex-col gap-1">
