@@ -1,10 +1,12 @@
+import type { CategoryId } from "./categories";
+
 export interface Item {
   id: string;
   title: string;
   description: string;
-  category: string;
+  category: CategoryId;
   position: number;
   selected: boolean;
 }
 
-export type ToDoInput = Pick<Item, "title" | "description" | "category">;
+export type ItemInput = Pick<Item, "title" | "description" | "category">;

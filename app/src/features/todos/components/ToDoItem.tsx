@@ -1,6 +1,6 @@
 import { todoPaths } from "../routes";
 import type { ToDo } from "../domain/todo";
-import { toggleSelected } from "../data/todoRepo";
+import { actions } from "../hooks/useToDosActions";
 import { Link } from "react-router";
 import { GripVerticalIcon } from "lucide-react";
 import { useSortable } from "@dnd-kit/sortable";
@@ -31,7 +31,7 @@ export default function ToDoItem({ todo }: { todo: ToDo }) {
         <input
           type="checkbox"
           checked={todo.selected}
-          onChange={() => toggleSelected(todo.id)}
+          onChange={() => actions.toggleSelected(todo.id)}
           className="h-5 w-5 accent-neutral-800"
         />
       </label>
