@@ -34,6 +34,10 @@ export async function getItems(id: string): Promise<Item | null> {
   return (await db.items.get(id)) ?? null;
 }
 
+export async function getItem(id: string): Promise<Item | null> {
+  return (await db.items.get(id)) ?? null;
+}
+
 export async function updateItem(
   id: string,
   updates: Pick<Item, "title" | "description">,
@@ -76,7 +80,7 @@ export async function toggleSelected(id: string): Promise<void> {
   });
 }
 
-export async function reorderToDos(
+export async function reorderItems(
   category: CategoryId,
   orderedIds: string[],
 ): Promise<void> {
