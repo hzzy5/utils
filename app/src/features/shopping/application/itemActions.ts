@@ -29,7 +29,7 @@ async function updateItem(
   item: Item,
   updates: ItemInput,
 ): Promise<SubmitResult> {
-  const titleValid = validateItemTitle(item.title);
+  const titleValid = validateItemTitle(updates.title);
   if (!titleValid.ok) {
     return { ok: false, error: titleValid.error };
   }

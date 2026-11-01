@@ -1,4 +1,4 @@
-import { CATEGORIES, type CategoryId } from "./categories";
+import { type CategoryId } from "./categories";
 import type { Item } from "./item";
 
 export function createItem(
