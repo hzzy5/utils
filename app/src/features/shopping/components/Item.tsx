@@ -37,7 +37,7 @@ export default function Item({ item }: { item: Item }) {
       </label>
       <Link
         to={shoppingPaths.detail(item.id)}
-        className="break-words px-2 text-black"
+        className={`break-words px-2 text-black ${item.selected ? "line-through" : ""}`}
       >
         {item.title}
       </Link>

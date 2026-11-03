@@ -37,7 +37,7 @@ export default function ToDoItem({ todo }: { todo: ToDo }) {
       </label>
       <Link
         to={todoPaths.detail(todo.id)}
-        className="break-words px-2 text-black"
+        className={`break-words px-2 text-black ${todo.selected && todo.category === "tagesplan" ? "line-through" : ""}`}
       >
         {todo.title}
       </Link>
