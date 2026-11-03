@@ -21,7 +21,7 @@ export default function Item({ item }: { item: Item }) {
     <li
       ref={setNodeRef}
       style={{
-        transform: CSS.Transform.toString(transform),
+        transform: CSS.Translate.toString(transform),
         transition,
         opacity: isDragging ? 0.5 : 1,
       }}
