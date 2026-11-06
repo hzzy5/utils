@@ -15,6 +15,7 @@ export default defineConfig({
         short_name: "utils",
         start_url: "/",
         display: "standalone",
+        orientation: "portrait",
         icons: [
           {
             src: "utilslogo192.png",
