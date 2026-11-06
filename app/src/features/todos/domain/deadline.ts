@@ -29,6 +29,8 @@ export function formatDeadline(deadline: Date, now: Date): string {
     result += ` ${hourDiff} ${hourWord} & ${restMin} ${restMinWord}`;
   } else if (mins) {
     result += ` ${minDiff} ${minWord}`;
+  } else {
+    result = "Deadline jetzt";
   }
   return result;
 }
