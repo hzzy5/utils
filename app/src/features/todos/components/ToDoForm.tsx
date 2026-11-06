@@ -123,7 +123,7 @@ export function ToDoForm({
               type="datetime-local"
               value={deadline}
               onChange={(e) => setDeadline(e.target.value)}
-              className="w-full rounded bg-white px-2 py-1 text-base"
+              className="box-border w-full min-w-0 rounded bg-white px-2 py-1 text-base"
             />
           </div>
           {error && <p>{error}</p>}
