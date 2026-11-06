@@ -21,11 +21,12 @@ export function formatDeadline(deadline: Date, now: Date): string {
   const dayWord = dayDiff === 1 ? "Tag" : "Tagen";
   const hourWord = hourDiff === 1 ? "Stunde" : "Stunden";
   const minWord = minDiff === 1 ? "Minute" : "Minuten";
+  const restMinWord = restMin === 1 ? "Minute" : "Minuten";
 
   if (days) {
     result += ` ${dayDiff} ${dayWord}`;
   } else if (hours) {
-    result += ` ${hourDiff} ${hourWord} & ${minDiff} ${restMin}`;
+    result += ` ${hourDiff} ${hourWord} & ${restMin} ${restMinWord}`;
   } else if (mins) {
     result += ` ${minDiff} ${minWord}`;
   }
