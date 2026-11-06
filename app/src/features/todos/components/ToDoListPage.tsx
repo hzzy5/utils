@@ -20,6 +20,7 @@ import {
   verticalListSortingStrategy,
   arrayMove,
 } from "@dnd-kit/sortable";
+import { useEffect, useState } from "react";
 
 export default function TodoListPage() {
   const { category } = useParams();
@@ -32,6 +33,15 @@ export default function TodoListPage() {
 
 function CategoryList({ category }: { category: CategoryId }) {
   const todos = useToDosByCategory(category);
+  const [now, setNow] = useState(() => new Date());
+
+  useEffect(() => {
+    const intervalId = window.setInterval(() => {
+      setNow(new Date());
+    }, 60_000);
+
+    return () => window.clearInterval(intervalId);
+  }, []);
 
   async function handleDragEnd({ active, over }: DragEndEvent) {
     if (!todos || !over || active.id === over.id) return;
@@ -72,7 +82,7 @@ function CategoryList({ category }: { category: CategoryId }) {
           >
             <ul className="mx-auto flex w-full max-w-[25rem] flex-col gap-4 px-4 py-5">
               {todos.map((todo) => (
-                <ToDoItem key={todo.id} todo={todo} />
+                <ToDoItem key={todo.id} todo={todo} now={now} />
               ))}
             </ul>
           </SortableContext>

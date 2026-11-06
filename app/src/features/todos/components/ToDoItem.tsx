@@ -5,8 +5,9 @@ import { Link } from "react-router";
 import { GripVerticalIcon } from "lucide-react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { formatDeadline } from "../domain/deadline";
 
-export default function ToDoItem({ todo }: { todo: ToDo }) {
+export default function ToDoItem({ todo, now }: { todo: ToDo; now: Date }) {
   const {
     attributes,
     listeners,
@@ -37,9 +38,20 @@ export default function ToDoItem({ todo }: { todo: ToDo }) {
       </label>
       <Link
         to={todoPaths.detail(todo.id)}
-        className={`break-words px-2 text-black ${todo.selected && todo.category === "tagesplan" ? "line-through" : ""}`}
+        className="flex flex-col items-center break-words px-2 text-black"
       >
-        {todo.title}
+        <span
+          className={
+            todo.selected && todo.category === "tagesplan" ? "line-through" : ""
+          }
+        >
+          {todo.title}
+        </span>
+        {todo.deadline && (
+          <span className="text-base leading-tight text-red-600">
+            {formatDeadline(todo.deadline, now)}
+          </span>
+        )}
       </Link>
       <button
         ref={setActivatorNodeRef}

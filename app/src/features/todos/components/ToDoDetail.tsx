@@ -33,6 +33,7 @@ export function ToDoDetail() {
           title: todo.title,
           description: todo.description,
           category: todo.category,
+          deadline: todo.deadline,
         }}
         submitLabel="Speichern"
         onSubmit={handleSubmit}

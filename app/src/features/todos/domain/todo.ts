@@ -4,9 +4,13 @@ export interface ToDo {
   id: string;
   title: string;
   description: string;
+  deadline?: Date;
   category: CategoryId;
   position: number;
   selected: boolean;
 }
 
-export type ToDoInput = Pick<ToDo, "title" | "description" | "category">;
+export type ToDoInput = Pick<
+  ToDo,
+  "title" | "description" | "category" | "deadline"
+>;

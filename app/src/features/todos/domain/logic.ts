@@ -13,6 +13,7 @@ export function createToDo(
   description: string,
   category: CategoryId,
   position: number,
+  deadline?: Date,
 ): ToDo {
   return {
     id: crypto.randomUUID(),
@@ -21,11 +22,12 @@ export function createToDo(
     category,
     position,
     selected: false,
+    deadline,
   };
 }
 export function updateToDo(
   todo: ToDo,
-  updates: Partial<Omit<ToDo, "id" | "position" | "category">>,
+  updates: Partial<Omit<ToDo, "id" | "position" | "category | deadline">>,
 ): ToDo {
   return {
     ...todo,

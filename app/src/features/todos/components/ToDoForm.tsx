@@ -11,6 +11,16 @@ interface TodoFormProps {
   onDelete?: () => void;
 }
 
+function toDateTimeLocalValue(date?: Date): string {
+  if (!date) return "";
+
+  const localDate = new Date(
+    date.getTime() - date.getTimezoneOffset() * 60_000,
+  );
+
+  return localDate.toISOString().slice(0, 16);
+}
+
 export function ToDoForm({
   initialValues,
   submitLabel,
@@ -20,6 +30,9 @@ export function ToDoForm({
   const [title, setTitle] = useState(initialValues.title);
   const [description, setDescription] = useState(initialValues.description);
   const [category, setCategory] = useState(initialValues.category);
+  const [deadline, setDeadline] = useState(
+    toDateTimeLocalValue(initialValues.deadline),
+  );
   const [error, setError] = useState<TitleError | null>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
 
@@ -34,7 +47,14 @@ export function ToDoForm({
   async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     setError(null);
-    const result = await onSubmit({ title, description, category });
+    const deadlineDate = deadline ? new Date(deadline) : undefined;
+
+    const result = await onSubmit({
+      title,
+      description,
+      category,
+      deadline: deadlineDate,
+    });
     result.ok ? setError(null) : setError(result.error);
   }
 
@@ -93,6 +113,18 @@ export function ToDoForm({
                 </option>
               ))}
             </select>
+          </div>
+          <div className="flex flex-col gap-1">
+            <label htmlFor="deadline" className="text-sm">
+              Deadline
+            </label>
+            <input
+              id="deadline"
+              type="datetime-local"
+              value={deadline}
+              onChange={(e) => setDeadline(e.target.value)}
+              className="w-full rounded bg-white px-2 py-1 text-base"
+            />
           </div>
           {error && <p>{error}</p>}
           <button
