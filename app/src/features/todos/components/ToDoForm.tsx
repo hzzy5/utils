@@ -114,7 +114,7 @@ export function ToDoForm({
               ))}
             </select>
           </div>
-          <div className="flex flex-col gap-1">
+          <div className="flex w-full min-w-0 flex-col gap-1">
             <label htmlFor="deadline" className="text-sm">
               Deadline
             </label>
@@ -123,7 +123,7 @@ export function ToDoForm({
               type="datetime-local"
               value={deadline}
               onChange={(e) => setDeadline(e.target.value)}
-              className="box-border w-full min-w-0 rounded bg-white px-2 py-1 text-base"
+              className="box-border block w-full min-w-0 max-w-full rounded bg-white px-2 py-1 text-base"
             />
           </div>
           {error && <p>{error}</p>}
