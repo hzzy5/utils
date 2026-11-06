@@ -114,7 +114,7 @@ export function ToDoForm({
               ))}
             </select>
           </div>
-          <div className="flex w-full min-w-0 flex-col gap-1">
+          <div className="flex min-w-0 flex-col gap-1">
             <label htmlFor="deadline" className="text-sm">
               Deadline
             </label>
