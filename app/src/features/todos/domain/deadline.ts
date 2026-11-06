@@ -12,6 +12,7 @@ export function formatDeadline(deadline: Date, now: Date): string {
 
   const difference = deadlineMilli - nowMilli;
   const days = Math.abs(difference) >= 24 * 60 * 60 * 1000;
+  const hours = Math.abs(difference) >= 60 * 60 * 1000;
   const mins = Math.abs(difference) >= 60 * 1000;
   const dayDiff = Math.floor(Math.abs(difference) / (24 * 60 * 60 * 1000));
   const hourDiff = Math.floor(Math.abs(difference) / (60 * 60 * 1000));
@@ -22,10 +23,10 @@ export function formatDeadline(deadline: Date, now: Date): string {
 
   if (days) {
     result += ` ${dayDiff} ${dayWord}`;
+  } else if (hours) {
+    result += ` ${hourDiff} ${hourWord} & ${minDiff} ${minWord}`;
   } else if (mins) {
     result += ` ${minDiff} ${minWord}`;
-  } else {
-    result += ` ${hourDiff} ${hourWord} & ${minDiff} ${minWord}`;
   }
   return result;
 }
