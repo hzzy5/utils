@@ -2,7 +2,7 @@ import { todoPaths } from "../routes";
 import type { ToDo } from "../domain/todo";
 import { actions } from "../hooks/useToDosActions";
 import { Link } from "react-router";
-import { GripVerticalIcon } from "lucide-react";
+import { GripVerticalIcon, InfoIcon } from "lucide-react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { formatDeadline } from "../domain/deadline";
@@ -26,7 +26,7 @@ export default function ToDoItem({ todo, now }: { todo: ToDo; now: Date }) {
         transition,
         opacity: isDragging ? 0.5 : 1,
       }}
-      className="grid grid-cols-[2.75rem_1fr_2.75rem] items-center border-4 border-black bg-[#d9d9d9] py-1 text-center text-xl font-light text-black font-[Abel]"
+      className="grid grid-cols-[2.75rem_1fr_0.1rem_2.75rem] items-center border-4 border-black bg-[#d9d9d9] py-1 text-center text-xl font-light text-black font-[Abel]"
     >
       <label className="flex items-center justify-center">
         <input
@@ -53,6 +53,16 @@ export default function ToDoItem({ todo, now }: { todo: ToDo; now: Date }) {
           </span>
         )}
       </Link>
+      <div className="flex items-center justify-center">
+        {todo.description.trim() !== "" && (
+          <Link
+            to={todoPaths.detail(todo.id)}
+            className="flex items-center justify-center"
+          >
+            <InfoIcon className="h-5 w-5 text-black" />
+          </Link>
+        )}
+      </div>
       <button
         ref={setActivatorNodeRef}
         type="button"
