@@ -18,6 +18,7 @@ export async function addToDo(input: ToDoInput): Promise<void> {
       input.description,
       input.category,
       getNextPosition(todoArray, input.category),
+      input.deadline,
     );
     await db.todos.add(todo);
   });
