@@ -41,9 +41,11 @@ export async function updateToDo(
 
 export async function moveCheckedToNext(category: CategoryId) {
   const nextCategory = getNextCategory(category);
-  if (nextCategory === null) return;
-
-  repo.moveSelectedToCategory(category, nextCategory);
+  if (nextCategory === null) {
+    await repo.deleteSelected(category);
+  } else {
+    await repo.moveSelectedToCategory(category, nextCategory);
+  }
 }
 export async function moveCheckedToPrevious(category: CategoryId) {
   const prevCategory = getPreviousCategory(category);

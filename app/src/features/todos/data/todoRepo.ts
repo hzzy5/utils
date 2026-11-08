@@ -125,3 +125,16 @@ export async function reorderToDos(
     await db.todos.bulkPut(reorderedTodos);
   });
 }
+export function deleteSelected(from: CategoryId): Promise<number> {
+  return db.transaction("rw", db.todos, async () => {
+    const selected = await db.todos
+      .where("category")
+      .equals(from)
+      .and((todo) => todo.selected)
+      .toArray();
+    if (selected.length === 0) return 0;
+
+    await db.todos.bulkDelete(selected.map((todo) => todo.id));
+    return selected.length;
+  });
+}
