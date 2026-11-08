@@ -80,7 +80,7 @@ function CategoryList({ category }: { category: CategoryId }) {
             items={todos.map((todo) => todo.id)}
             strategy={verticalListSortingStrategy}
           >
-            <ul className="mx-auto flex w-full max-w-[25rem] flex-col gap-4 px-4 py-5">
+            <ul className="mx-auto flex w-full max-w-[25rem] flex-col gap-4 px-4 pt-5 pb-28">
               {todos.map((todo) => (
                 <ToDoItem key={todo.id} todo={todo} now={now} />
               ))}

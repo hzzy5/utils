@@ -60,7 +60,7 @@ function CategoryList({ category }: { category: CategoryId }) {
             items={items.map((item) => item.id)}
             strategy={verticalListSortingStrategy}
           >
-            <ul className="mx-auto flex w-full max-w-[25rem] flex-col gap-4 px-4 py-5">
+            <ul className="mx-auto flex w-full max-w-[25rem] flex-col gap-4 px-4 pt-5 pb-28">
               {items.map((item) => (
                 <Item key={item.id} item={item} />
               ))}
