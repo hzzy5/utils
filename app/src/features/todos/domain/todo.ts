@@ -8,6 +8,8 @@ export interface ToDo {
   category: CategoryId;
   position: number;
   selected: boolean;
+  habitId?: string;
+  occurenceDate: string;
 }
 
 export type ToDoInput = Pick<
