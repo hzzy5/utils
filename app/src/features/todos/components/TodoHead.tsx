@@ -20,7 +20,7 @@ function TodoHead({
           className="w-full rounded bg-[#d9d9d9] py-2 text-black border-3"
           onClick={onPressLeft}
         >
-          Weiter
+          {category === "done" ? "Löschen" : "Weiter"}
         </button>
       ) : (
         <span />
