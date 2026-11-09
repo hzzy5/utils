@@ -38,7 +38,7 @@ export default function ToDoItem({ todo, now }: { todo: ToDo; now: Date }) {
       </label>
       <Link
         to={todoPaths.detail(todo.id)}
-        className="flex flex-col items-center break-words px-2 text-black"
+        className="flex flex-col items-center wrap-break-word px-2 text-black"
       >
         <span
           className={
