@@ -9,6 +9,7 @@ export const actions = {
   moveItem: repo.moveItem,
   toggleSelected: repo.toggleSelected,
   reorderItems: repo.reorderItems,
+  deleteSelected: repo.deleteSelected,
 };
 
 async function addItem(input: ItemInput): Promise<SubmitResult> {

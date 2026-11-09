@@ -108,3 +108,17 @@ export async function reorderItems(
     await db.items.bulkPut(reorderedItems);
   });
 }
+
+export function deleteSelected(from: CategoryId): Promise<number> {
+  return db.transaction("rw", db.items, async () => {
+    const selected = await db.items
+      .where("category")
+      .equals(from)
+      .and((item) => item.selected)
+      .toArray();
+    if (selected.length === 0) return 0;
+
+    await db.items.bulkDelete(selected.map((item) => item.id));
+    return selected.length;
+  });
+}

@@ -46,7 +46,10 @@ function CategoryList({ category }: { category: CategoryId }) {
   }
   return (
     <>
-      <ShoppingHead subHeadlineText={getCategoryLabel(category)} />
+      <ShoppingHead
+        subHeadlineText={getCategoryLabel(category)}
+        category={category}
+      />
       <FloatingActionButton to={shoppingPaths.create(category)} />
       {items === undefined ? (
         <p>Lädt …</p>
