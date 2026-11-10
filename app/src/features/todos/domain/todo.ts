@@ -9,7 +9,7 @@ export interface ToDo {
   position: number;
   selected: boolean;
   habitId?: string;
-  occurenceDate: string;
+  occurenceDate?: string;
 }
 
 export type ToDoInput = Pick<

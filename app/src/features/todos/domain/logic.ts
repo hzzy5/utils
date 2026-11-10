@@ -15,6 +15,13 @@ export function createToDo(
   position: number,
   deadline?: Date,
 ): ToDo {
+  const today = new Date();
+  const occurenceDate = [
+    today.getFullYear(),
+    String(today.getMonth() + 1).padStart(2, "0"),
+    String(today.getDate()).padStart(2, "0"),
+  ].join("-");
+
   return {
     id: crypto.randomUUID(),
     title,
@@ -23,6 +30,7 @@ export function createToDo(
     position,
     selected: false,
     deadline,
+    occurenceDate,
   };
 }
 export function updateToDo(
