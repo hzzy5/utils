@@ -9,8 +9,20 @@ Hier erreichbar: https://utils.effinglasse.workers.dev
 ### To-Do's
 <img width="1718" height="1514" alt="image" src="https://github.com/user-attachments/assets/9652a564-460a-4370-98e3-32c05c7c70e1" />
 
+
+
+https://github.com/user-attachments/assets/8762dd9a-b7b3-42ea-aae6-10938b60a4aa
+
+
+
 ### Züge
 ### Einkaufsliste
+
+
+
+https://github.com/user-attachments/assets/833e88fe-c411-4d72-94fa-cbac3b1f61ab
+
+
 ### Habitbuilder
 ### Flashcards/quiz
 ### Rankings
