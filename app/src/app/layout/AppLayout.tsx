@@ -1,8 +1,10 @@
 import { Outlet, useNavigation } from "react-router";
 import TopBar from "./topbar/TopBar";
 import Loading from "@/shared/ui/Loading";
+import { useHabitSync } from "@/features/habits/hooks/useHabitSync";
 
 function AppLayout() {
+  useHabitSync();
   const navigation = useNavigation();
   const isLoading = navigation.state === "loading";
   return (

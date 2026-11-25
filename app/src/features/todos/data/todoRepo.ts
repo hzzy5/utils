@@ -1,5 +1,9 @@
 import { db } from "@/shared/db/db";
 import {
+  applyHabitCompletionForTodo,
+  applyHabitUncompletionForTodo,
+} from "@/features/habits/application/habitSync";
+import {
   createToDo,
   getNextPosition,
   sortToDosByPosition,
@@ -46,37 +50,68 @@ export async function updateToDo(
   });
 }
 
-export async function deleteToDo(id: string): Promise<void> {
-  await db.todos.delete(id);
+export async function deleteToDo(
+  id: string,
+  now: Date = new Date(),
+): Promise<void> {
+  await db.transaction("rw", db.todos, db.habits, async () => {
+    const todo = await db.todos.get(id);
+    if (!todo) return;
+    await db.todos.delete(id);
+    await applyHabitCompletionForTodo(todo, now);
+  });
 }
 
 export async function moveToDo(
   id: string,
   newCategory: CategoryId,
+  now: Date = new Date(),
 ): Promise<void> {
-  await db.transaction("rw", db.todos, async () => {
+  await db.transaction("rw", db.todos, db.habits, async () => {
     const todoArray = await db.todos.toArray();
     const todo = await db.todos.get(id);
     if (!todo) return;
     await db.todos.put(
       applyMove(todo, newCategory, getNextPosition(todoArray, newCategory)),
     );
+
+    if (newCategory === "done") {
+      await applyHabitCompletionForTodo(todo, now);
+    } else if (
+      todo.category === "done" ||
+      (todo.category === "tagesplan" && todo.selected)
+    ) {
+      await applyHabitUncompletionForTodo(todo, now);
+    }
   });
 }
 
-export async function toggleSelected(id: string): Promise<void> {
-  await db.transaction("rw", db.todos, async () => {
+export async function toggleSelected(
+  id: string,
+  now: Date = new Date(),
+): Promise<void> {
+  await db.transaction("rw", db.todos, db.habits, async () => {
     const todo = await db.todos.get(id);
     if (!todo) return;
-    await db.todos.put(applyToggleSelected(todo));
+    const updated = applyToggleSelected(todo);
+    await db.todos.put(updated);
+
+    if (updated.category === "tagesplan") {
+      if (updated.selected) {
+        await applyHabitCompletionForTodo(updated, now);
+      } else {
+        await applyHabitUncompletionForTodo(updated, now);
+      }
+    }
   });
 }
 
 export async function moveSelectedToCategory(
   from: CategoryId,
   to: CategoryId,
+  now: Date = new Date(),
 ): Promise<number> {
-  return db.transaction("rw", db.todos, async () => {
+  return db.transaction("rw", db.todos, db.habits, async () => {
     const selected = await db.todos
       .where("category")
       .equals(from)
@@ -90,6 +125,17 @@ export async function moveSelectedToCategory(
       applyMove(todo, to, start + index),
     );
     await db.todos.bulkPut(moved);
+
+    if (to === "done") {
+      for (const todo of selected) {
+        await applyHabitCompletionForTodo(todo, now);
+      }
+    } else if (from === "done" || from === "tagesplan") {
+      for (const todo of selected) {
+        await applyHabitUncompletionForTodo(todo, now);
+      }
+    }
+
     return moved.length;
   });
 }
@@ -125,8 +171,11 @@ export async function reorderToDos(
     await db.todos.bulkPut(reorderedTodos);
   });
 }
-export function deleteSelected(from: CategoryId): Promise<number> {
-  return db.transaction("rw", db.todos, async () => {
+export function deleteSelected(
+  from: CategoryId,
+  now: Date = new Date(),
+): Promise<number> {
+  return db.transaction("rw", db.todos, db.habits, async () => {
     const selected = await db.todos
       .where("category")
       .equals(from)
@@ -135,6 +184,9 @@ export function deleteSelected(from: CategoryId): Promise<number> {
     if (selected.length === 0) return 0;
 
     await db.todos.bulkDelete(selected.map((todo) => todo.id));
+    for (const todo of selected) {
+      await applyHabitCompletionForTodo(todo, now);
+    }
     return selected.length;
   });
 }

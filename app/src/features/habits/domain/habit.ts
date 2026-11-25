@@ -86,25 +86,77 @@ type Minute0To59 =
   | "58"
   | "59";
 
-type TimeString = `${Hour0To23}:${Minute0To59}` | "24:00";
+export type TimeString = `${Hour0To23}:${Minute0To59}`;
+
+export type Weekday = 0 | 1 | 2 | 3 | 4 | 5 | 6;
+
+export type HabitMode = "daily" | "weekly" | "custom";
+
+export const HABIT_MODES = [
+  { id: "daily", label: "Täglich" },
+  { id: "weekly", label: "Wöchentlich" },
+  { id: "custom", label: "Benutzerdefiniert" },
+] as const;
+
+export const WEEKDAYS: ReadonlyArray<{
+  id: Weekday;
+  shortLabel: string;
+  label: string;
+}> = [
+  { id: 1, shortLabel: "Mo", label: "Montag" },
+  { id: 2, shortLabel: "Di", label: "Dienstag" },
+  { id: 3, shortLabel: "Mi", label: "Mittwoch" },
+  { id: 4, shortLabel: "Do", label: "Donnerstag" },
+  { id: 5, shortLabel: "Fr", label: "Freitag" },
+  { id: 6, shortLabel: "Sa", label: "Samstag" },
+  { id: 0, shortLabel: "So", label: "Sonntag" },
+];
+
+export function isHabitMode(value: string): value is HabitMode {
+  return HABIT_MODES.some((mode) => mode.id === value);
+}
+
+export function isTimeString(value: string): value is TimeString {
+  return /^([01]\d|2[0-3]):[0-5]\d$/.test(value);
+}
+
+export interface HabitOccurrence {
+  key: string;
+  start: Date;
+  deadline: Date;
+  completed: boolean;
+  todoId?: string;
+}
 
 export interface Habit {
   id: string;
   title: string;
   description: string;
-  mode: "daily" | "weekly" | "custom";
-  weekday?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
   position: number;
-  intervalDays?: number;
+  mode: HabitMode;
+  weekdays: Weekday[];
+  intervalDays: number;
   startTime: TimeString;
   durationHours: number;
+  anchorDate: string;
   streak: number;
-  anchorDate: Date;
-  lastProcessed: Date;
-  lastCompleted: Date;
+  activeOccurrence?: HabitOccurrence;
+  nextScheduledStart: Date;
+  lastCompletedAt?: Date;
 }
+
+export type HabitSchedule = Pick<
+  Habit,
+  "mode" | "weekdays" | "intervalDays" | "startTime" | "durationHours" | "anchorDate"
+>;
 
 export type HabitInput = Pick<
   Habit,
-  "title" | "description" | "mode" | "startTime" | "durationHours"
+  | "title"
+  | "description"
+  | "mode"
+  | "weekdays"
+  | "intervalDays"
+  | "startTime"
+  | "durationHours"
 >;
