@@ -48,7 +48,11 @@ export default function ToDoItem({ todo, now }: { todo: ToDo; now: Date }) {
           {todo.title}
         </span>
         {todo.deadline && (
-          <span className="leading-tight text-red-600 text-sm">
+          <span
+            className={`leading-tight text-sm ${
+              todo.deadline < now ? "text-red-600" : "text-green-700"
+            }`}
+          >
             {formatDeadline(todo.deadline, now)}
           </span>
         )}
